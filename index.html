@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stolz Hermès F1 Team | Official Site</title>
+<meta name="description" content="The official home of the Stolz Hermès Formula One team — drivers, factory, calendar, results and tickets.">
+<meta name="theme-color" content="#c9a25a">
+<meta property="og:title" content="Stolz Hermès F1 Team">
+<meta property="og:description" content="The official home of the Stolz Hermès Formula One team — drivers, factory, calendar, results and tickets.">
+<meta property="og:image" content="pictures/hero.PNG">
+<meta property="og:type" content="website">
+<link rel="preload" as="image" href="pictures/hero.PNG" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsTeam",
+  "name": "Stolz Hermès F1 Team",
+  "sport": "Formula One Racing",
+  "url": "https://stolz-hermes.github.io/website/",
+  "logo": "pictures/hero.PNG",
+  "foundingDate": "2026",
+  "location": { "@type": "Place", "name": "Singapore" }
+}
+</script>
+<style>
+  :root{
+    --ink:#070c18; --navy:#0f1f3d; --navy-soft:#162a4f;
+    --gold:#c9a25a; --gold-bright:#e6c17f; --paper:#f4f0e6; --mute:#8b93a8;
+    --ease-out:cubic-bezier(.16,.8,.24,1); --dur-base:.25s;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative; }
+  body::after{
+    content:''; position:fixed; inset:0; z-index:45; pointer-events:none; opacity:.03; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  img{ max-width:100%; display:block; }
+  h1,h2,h3,p{ margin:0; }
+  a{ color:inherit; }
+  a, button{ cursor:pointer; touch-action:manipulation; }
+  button{ font:inherit; border:none; background:none; color:inherit; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  .skip-link{ position:absolute; top:-4rem; left:1rem; z-index:110; background:var(--gold); color:var(--ink); padding:.8rem 1.4rem; font-family:'IBM Plex Mono',monospace; font-size:.85rem; font-weight:600; text-decoration:none; border-radius:2px; transition:top var(--dur-base) var(--ease-out); }
+  .skip-link:focus{ top:1rem; }
+
+  /* custom cursor — additive, desktop only, never hides the real one */
+  .cursor{ position:fixed; top:0; left:0; z-index:120; width:26px; height:26px; margin:-13px 0 0 -13px; border:1px solid var(--gold); border-radius:50%; pointer-events:none; opacity:0; transition:opacity .3s, transform .2s var(--ease-out), background .2s; }
+  .cursor.is-visible{ opacity:1; }
+  .cursor.is-active{ transform:scale(1.5); background:rgba(201,162,90,.14); }
+  @media (pointer:coarse), (prefers-reduced-motion:reduce){ .cursor{ display:none; } }
+
+  .telemetry{ position:fixed; top:0; left:0; height:2px; width:0%; background:var(--gold); z-index:90; transition:width .05s linear; }
+
+  .wrap{ max-width:1320px; margin:0 auto; padding-left:clamp(1.2rem,4vw,2.5rem); padding-right:clamp(1.2rem,4vw,2.5rem); }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.6rem; flex-wrap:wrap; }
+  .section-head h2{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; letter-spacing:-.01em; font-size:clamp(1.5rem,3.2vw,2.1rem); }
+  .kicker{ font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+
+  .reveal{ opacity:0; transform:translateY(12px); transition:opacity .4s var(--ease-out), transform .4s var(--ease-out); }
+  .reveal.is-visible{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal{ transition:none !important; opacity:1 !important; transform:none !important; } }
+
+  /* nav */
+  .nav{ position:fixed; top:2px; left:0; right:0; z-index:80; display:flex; align-items:center; justify-content:space-between; padding:.9rem clamp(1.2rem,4vw,2.5rem); background:rgba(7,12,24,.92); backdrop-filter:blur(8px); border-bottom:1px solid rgba(201,162,90,.2); }
+  .nav__mark{ display:flex; align-items:center; gap:.6rem; text-decoration:none; }
+  .nav__shield{ width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.68rem; color:var(--ink); background:var(--gold); clip-path:polygon(50% 0%, 100% 15%, 100% 72%, 50% 100%, 0% 72%, 0% 15%); }
+  .nav__wordmark{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; letter-spacing:.01em; font-size:1.05rem; }
+  .nav__links{ display:flex; align-items:center; gap:clamp(1rem,2vw,1.5rem); }
+  .nav__links a{ position:relative; font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; color:var(--mute); text-decoration:none; transition:color .2s; padding:.4rem .1rem; }
+  .nav__links a::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--gold-bright); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--ease-out); }
+  .nav__links a:hover, .nav__links a:focus-visible{ color:var(--gold-bright); }
+  .nav__links a.is-active{ color:var(--gold-bright); }
+  .nav__links a.is-active::after{ transform:scaleX(1); }
+  .nav__cta{ background:var(--gold); color:var(--ink); padding:.5rem 1rem; border-radius:2px; font-weight:600; }
+  .nav__cta:hover{ background:var(--gold-bright); color:var(--ink); }
+  .nav__burger{ display:none; width:32px; height:32px; align-items:center; justify-content:center; }
+  .nav__burger span, .nav__burger span::before, .nav__burger span::after{ content:''; display:block; width:20px; height:2px; background:var(--paper); position:relative; transition:transform .2s, opacity .2s; }
+  .nav__burger span::before{ position:absolute; top:-6px; }
+  .nav__burger span::after{ position:absolute; top:6px; }
+  .nav__burger.is-open span{ background:transparent; }
+  .nav__burger.is-open span::before{ transform:translateY(6px) rotate(45deg); }
+  .nav__burger.is-open span::after{ transform:translateY(-6px) rotate(-45deg); }
+  @media (max-width:900px){
+    .nav__links a:not(.nav__cta){ display:none; }
+    .nav__burger{ display:flex; }
+  }
+
+  /* mobile menu */
+  .mobilenav{ position:fixed; top:0; right:0; bottom:0; width:min(320px,82vw); z-index:100; background:var(--navy); border-left:1px solid rgba(201,162,90,.25); transform:translateX(100%); transition:transform .3s var(--ease-out); display:flex; flex-direction:column; padding:5.5rem 2rem 2rem; gap:1.4rem; }
+  .mobilenav.is-open{ transform:translateX(0); }
+  .mobilenav a{ font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; color:var(--paper); text-decoration:none; }
+  .mobilenav a:hover, .mobilenav a:focus-visible{ color:var(--gold-bright); }
+  .scrim{ position:fixed; inset:0; z-index:95; background:rgba(0,0,0,.5); opacity:0; pointer-events:none; transition:opacity .3s; }
+  .scrim.is-visible{ opacity:1; pointer-events:auto; }
+
+  /* race banner */
+  .raceband{ position:sticky; top:calc(2px + 56px); z-index:55; background:var(--navy); border-bottom:1px solid rgba(201,162,90,.2); padding:.55rem clamp(1.2rem,4vw,2.5rem); text-align:center; font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.08em; color:var(--gold-bright); }
+  .raceband #countdown{ color:var(--paper); font-weight:600; }
+
+  /* news ticker */
+  .newsticker{ background:var(--ink); border-bottom:1px solid rgba(201,162,90,.15); overflow:hidden; padding:.5rem 0; }
+  .newsticker__track{ display:flex; width:max-content; gap:3rem; animation:tick 20s linear infinite; font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.06em; color:var(--mute); }
+  .newsticker:hover .newsticker__track, .newsticker:focus-within .newsticker__track{ animation-play-state:paused; }
+  @keyframes tick{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){ .newsticker__track{ animation:none; overflow-x:auto; } }
+
+  /* hero */
+  .hero{ position:relative; min-height:78vh; display:flex; align-items:flex-end; overflow:hidden; }
+  .hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; will-change:transform; }
+  .hero__scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,12,24,.3) 0%, rgba(7,12,24,.55) 55%, rgba(7,12,24,.97) 100%); }
+  .hero__inner{ position:relative; z-index:1; width:100%; padding-bottom:clamp(2.2rem,6vh,3.5rem); }
+  .hero__badge{ display:inline-flex; align-items:center; gap:.5rem; background:rgba(201,162,90,.14); border:1px solid rgba(201,162,90,.4); border-radius:2px; padding:.4rem .8rem; font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:1.1rem; }
+  .hero h1{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; letter-spacing:-.01em; font-size:clamp(2.4rem,7vw,4.6rem); line-height:.98; }
+  .hero__tagline{ font-family:'IBM Plex Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); font-size:.9rem; margin-top:.7rem; }
+  .statbar{ display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; margin-top:1.3rem; font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); }
+  .statbar span:not(:last-child)::after{ content:'|'; margin-left:1.2rem; color:rgba(201,162,90,.4); }
+  .billing{ margin-top:1.6rem; padding-top:1.2rem; border-top:1px solid rgba(201,162,90,.25); font-family:'IBM Plex Mono',monospace; font-size:.75rem; letter-spacing:.05em; color:var(--mute); line-height:1.9; max-width:38ch; }
+  .billing b{ color:var(--paper); font-weight:600; }
+
+  /* about */
+  .about{ padding:clamp(3rem,7vh,4.5rem) 0; border-bottom:1px solid rgba(201,162,90,.15); }
+  .about p{ max-width:64ch; color:var(--mute); font-size:1.02rem; }
+
+  /* drivers — 3D flip cards */
+  .drivers{ padding:clamp(3rem,7vh,4.5rem) 0; border-bottom:1px solid rgba(201,162,90,.15); }
+  .drivers__grid{ display:grid; grid-template-columns:1fr; gap:1.6rem; }
+  @media (min-width:680px){ .drivers__grid{ grid-template-columns:1fr 1fr; } }
+  .flip{ perspective:1000px; aspect-ratio:3/4; }
+  .flip__inner{ position:relative; width:100%; height:100%; transition:transform .6s var(--ease-out); transform-style:preserve-3d; }
+  .flip:hover .flip__inner, .flip:focus-within .flip__inner{ transform:rotateY(180deg); }
+  @media (prefers-reduced-motion: reduce){ .flip__inner{ transition:none; } }
+  .flip__face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:3px; overflow:hidden; background:var(--navy); }
+  .flip__front img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.1) brightness(.9); }
+  .flip__front::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,12,24,0) 55%, rgba(7,12,24,.92) 100%); }
+  .flip__frontinfo{ position:absolute; left:1.1rem; bottom:1rem; z-index:1; }
+  .flip__num{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:2.4rem; line-height:1; }
+  .flip__name{ font-family:'Inter',sans-serif; font-weight:700; font-size:.95rem; margin-top:.2rem; }
+  .flip__back{ transform:rotateY(180deg); padding:1.4rem; display:flex; flex-direction:column; border:1px solid rgba(201,162,90,.3); }
+  .flip__back h3{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:1.2rem; margin-bottom:1rem; }
+  .flip__stats{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; flex:1; }
+  .flip__stat b{ display:block; font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:1.9rem; color:var(--gold-bright); line-height:1; }
+  .flip__stat span{ font-family:'IBM Plex Mono',monospace; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mute); }
+  .flip__note{ font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--mute); margin-top:auto; padding-top:.8rem; border-top:1px solid rgba(201,162,90,.2); }
+
+  /* factory (full-bleed) */
+  .factory{ position:relative; min-height:58vh; display:flex; overflow:hidden; }
+  .factory img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .factory__scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,12,24,0) 42%, rgba(7,12,24,.95) 100%); }
+  .factory__content{ position:relative; z-index:1; width:100%; align-self:flex-end; padding:clamp(2.2rem,6vh,3.2rem) 0; }
+  .factory__content h2{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(1.8rem,4vw,2.6rem); }
+  .factory__content p{ color:var(--mute); max-width:52ch; margin-top:.8rem; }
+
+  /* calendar */
+  .calendar{ padding:clamp(3rem,7vh,4.5rem) 0; border-bottom:1px solid rgba(201,162,90,.15); }
+  .calendar table{ width:100%; border-collapse:collapse; font-family:'Inter',sans-serif; font-size:.9rem; }
+  .calendar th{ text-align:left; font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); padding:.8rem 1rem; border-bottom:1px solid rgba(201,162,90,.25); }
+  .calendar td{ padding:.9rem 1rem; border-bottom:1px solid rgba(139,147,168,.15); }
+  .calendar tr{ cursor:pointer; transition:background .2s; }
+  .calendar tr:hover{ background:rgba(201,162,90,.06); }
+  .calendar tr.is-next{ background:rgba(201,162,90,.1); }
+  .calendar tr.is-next td:first-child{ color:var(--gold-bright); font-weight:600; }
+
+  /* results */
+  .results{ padding:clamp(3rem,7vh,4.5rem) 0; border-bottom:1px solid rgba(201,162,90,.15); }
+  .results__grid{ display:grid; grid-template-columns:1fr; gap:1.2rem; }
+  @media (min-width:680px){ .results__grid{ grid-template-columns:repeat(3,1fr); } }
+  .result{ background:var(--navy); border:1px solid rgba(201,162,90,.15); border-radius:3px; padding:1.4rem; }
+  .result.is-podium{ border-color:var(--gold); }
+  .result__pos{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:2.4rem; color:var(--gold-bright); line-height:1; }
+  .result__loc{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); margin-top:.5rem; }
+
+  /* partners grid */
+  .partners{ padding:clamp(3rem,7vh,4.5rem) 0; border-bottom:1px solid rgba(201,162,90,.15); }
+  .partners__grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(201,162,90,.15); border:1px solid rgba(201,162,90,.15); }
+  @media (min-width:640px){ .partners__grid{ grid-template-columns:repeat(5,1fr); } }
+  .partners__item{ background:var(--ink); display:flex; align-items:center; justify-content:center; padding:2rem 1rem; font-family:'IBM Plex Mono',monospace; font-size:.9rem; letter-spacing:.06em; color:var(--mute); filter:grayscale(1); text-align:center; transition:color var(--dur-base), filter var(--dur-base), background var(--dur-base); }
+  .partners__item:hover{ color:var(--gold-bright); filter:grayscale(0); background:var(--navy); }
+
+  .ticketband{ padding:clamp(2.5rem,6vh,3.5rem) 0; text-align:center; background:linear-gradient(180deg, var(--navy), var(--ink)); border-bottom:1px solid rgba(201,162,90,.15); }
+  .ticketband h2{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(1.5rem,3.4vw,2.1rem); margin-bottom:.8rem; }
+  .ticketband p{ color:var(--mute); max-width:48ch; margin:0 auto 1.4rem; }
+  .btn{ display:inline-block; background:var(--gold); color:var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; padding:.9rem 1.8rem; border-radius:2px; transition:background var(--dur-base); }
+  .btn:hover{ background:var(--gold-bright); }
+
+  .footer{ padding:clamp(2.5rem,6vw,3.2rem) 0 clamp(1.5rem,4vw,2rem); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.5rem; }
+  .footer__mark{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:1.15rem; }
+  .footer__links{ display:flex; gap:1.4rem; flex-wrap:wrap; }
+  .footer__links a{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--mute); text-decoration:none; }
+  .footer__links a:hover{ color:var(--gold-bright); }
+  .footer__legal{ width:100%; font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:rgba(139,147,168,.6); margin-top:.5rem; }
+
+  /* sound toggle */
+  .soundbtn{ position:fixed; right:1.2rem; bottom:1.2rem; z-index:70; width:46px; height:46px; border-radius:50%; background:var(--navy); border:1px solid rgba(201,162,90,.4); color:var(--gold); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.9rem; }
+  .soundbtn:hover{ background:var(--navy-soft); }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="telemetry" id="telemetry" role="presentation"></div>
+<div class="cursor" id="customCursor" aria-hidden="true"></div>
+<div class="scrim" id="scrim"></div>
+
+<nav class="nav" id="siteNav" aria-label="Primary">
+  <a href="#top" class="nav__mark">
+    <span class="nav__shield" aria-hidden="true">SH</span>
+    <span class="nav__wordmark">STOLZ HERMÈS</span>
+  </a>
+  <div class="nav__links">
+    <a href="#about">About</a>
+    <a href="#drivers">Drivers</a>
+    <a href="#factory">Factory</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#results">Results</a>
+    <a href="tickets/" class="nav__cta">Tickets</a>
+    <a href="shop/">Shop</a>
+  </div>
+  <button class="nav__burger" id="burgerBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span></button>
+</nav>
+
+<div class="mobilenav" id="mobileNav">
+  <a href="#about">About</a>
+  <a href="#drivers">Drivers</a>
+  <a href="#factory">Factory</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#results">Results</a>
+  <a href="tickets/">Tickets</a>
+  <a href="shop/">Shop</a>
+</div>
+
+<div class="raceband">NEXT: STOLZ HERMÈS SINGAPORE GP · SEP 28 &nbsp;|&nbsp; <span id="countdown">—</span></div>
+<div class="newsticker" aria-hidden="true">
+  <div class="newsticker__track">
+    <span>P2 AT MONZA</span><span>SH01 UPGRADE CONFIRMED</span><span>NEW FACTORY WING OPENS</span><span>2027 CALENDAR TALKS UNDERWAY</span>
+    <span>P2 AT MONZA</span><span>SH01 UPGRADE CONFIRMED</span><span>NEW FACTORY WING OPENS</span><span>2027 CALENDAR TALKS UNDERWAY</span>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <img src="pictures/hero.PNG" width="1536" height="1024" fetchpriority="high" alt="Stolz Hermès drivers on the grid ahead of the 2026 season">
+    <div class="hero__scrim"></div>
+    <div class="wrap hero__inner">
+      <span class="hero__badge reveal">Stolz Hermès F1 Team</span>
+      <h1 class="reveal">STOLZ HERMÈS<br>F1 TEAM</h1>
+      <p class="hero__tagline reveal">Pride. Speed. Precision.</p>
+      <div class="statbar reveal">
+        <span>Founded 2026</span><span>Singapore</span><span>2 Drivers</span><span>SH01</span>
+      </div>
+      <div class="billing reveal">
+        <div><b>No. 7</b> — Julian Rhodes</div>
+        <div><b>No. 12</b> — Felix Bergmann</div>
+        <div><b>Chassis SH01</b> — Stolz Hermès Power Unit</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="section-head"><h2 class="reveal">About the Team</h2></div>
+      <p class="reveal">Stolz Hermès is a Formula One constructor built on a name that means both pride and speed. Founded in 2026 and based out of Singapore, the team fields two cars and a chassis, the SH01, engineered from the ground up in-house.</p>
+      <div class="results__grid" style="margin-top:2rem;">
+        <div class="result reveal" style="padding:0; overflow:hidden;"><img src="pictures/1.PNG" width="1536" height="1024" loading="lazy" decoding="async" alt="SH01 front three-quarter" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="result reveal" style="padding:0; overflow:hidden;"><img src="pictures/2.PNG" width="1900" height="760" loading="lazy" decoding="async" alt="SH01 side profile" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="result reveal" style="padding:0; overflow:hidden;"><img src="pictures/3.PNG" width="1536" height="1024" loading="lazy" decoding="async" alt="Close-up of the SH01 front wing" style="width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="drivers" id="drivers">
+    <div class="wrap">
+      <div class="section-head"><h2 class="reveal">Drivers</h2><span class="kicker">Hover for stats</span></div>
+      <div class="drivers__grid">
+        <div class="flip reveal">
+          <div class="flip__inner">
+            <div class="flip__face flip__front">
+              <img src="pictures/4.PNG" width="1122" height="1402" loading="lazy" decoding="async" alt="Julian Rhodes, Stolz Hermès car number 7">
+              <div class="flip__frontinfo"><div class="flip__num">7</div><div class="flip__name">Julian Rhodes</div></div>
+            </div>
+            <div class="flip__face flip__back">
+              <h3>Julian Rhodes — No. 7</h3>
+              <div class="flip__stats">
+                <div class="flip__stat"><b>0</b><span>World Titles</span></div>
+                <div class="flip__stat"><b>2</b><span>Race Wins</span></div>
+                <div class="flip__stat"><b>3</b><span>Pole Positions</span></div>
+                <div class="flip__stat"><b>4</b><span>2026 Podiums</span></div>
+              </div>
+              <p class="flip__note">Debut season with Stolz Hermès, 2026.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip reveal">
+          <div class="flip__inner">
+            <div class="flip__face flip__front">
+              <img src="pictures/5.PNG" width="1086" height="1448" loading="lazy" decoding="async" alt="Felix Bergmann, Stolz Hermès car number 12">
+              <div class="flip__frontinfo"><div class="flip__num">12</div><div class="flip__name">Felix Bergmann</div></div>
+            </div>
+            <div class="flip__face flip__back">
+              <h3>Felix Bergmann — No. 12</h3>
+              <div class="flip__stats">
+                <div class="flip__stat"><b>0</b><span>World Titles</span></div>
+                <div class="flip__stat"><b>1</b><span>Race Wins</span></div>
+                <div class="flip__stat"><b>2</b><span>Pole Positions</span></div>
+                <div class="flip__stat"><b>3</b><span>2026 Podiums</span></div>
+              </div>
+              <p class="flip__note">Debut season with Stolz Hermès, 2026.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="factory" id="factory">
+    <img src="pictures/6.PNG" width="1532" height="1026" loading="lazy" decoding="async" alt="Mechanics preparing the SH01 in the factory at night">
+    <div class="factory__scrim"></div>
+    <div class="wrap factory__content">
+      <span class="kicker reveal">01:48 — the factory</span>
+      <h2 class="reveal">Nobody sees this part.</h2>
+      <p class="reveal">Every tenth gained on Sunday was bled for on a Tuesday night, under one bare light, by people who never stand on the podium.</p>
+    </div>
+  </section>
+
+  <section class="calendar" id="calendar">
+    <div class="wrap">
+      <div class="section-head"><h2 class="reveal">2026 Calendar</h2><span class="kicker">Click a race for details</span></div>
+      <table class="reveal" id="calendarTable">
+        <thead><tr><th>Round</th><th>Grand Prix</th><th>Dates</th></tr></thead>
+        <tbody>
+          <tr><td>13</td><td>Italy — Monza</td><td>Sep 4–6</td></tr>
+          <tr><td>14</td><td>Spain</td><td>Sep 11–13</td></tr>
+          <tr><td>15</td><td>Azerbaijan — Baku</td><td>Sep 24–26</td></tr>
+          <tr class="is-next"><td>17</td><td>Singapore</td><td>Oct 9–11</td></tr>
+          <tr><td>18</td><td>United States — Austin</td><td>Oct 23–25</td></tr>
+          <tr><td>19</td><td>Mexico City</td><td>Oct 30–Nov 1</td></tr>
+          <tr><td>20</td><td>São Paulo</td><td>Nov 6–8</td></tr>
+          <tr><td>21</td><td>Las Vegas</td><td>Nov 19–21</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="results" id="results">
+    <div class="wrap">
+      <div class="section-head"><h2 class="reveal">Recent Results</h2></div>
+      <div class="results__grid">
+        <div class="result is-podium reveal"><div class="result__pos">P2</div><div class="result__loc">Monza</div></div>
+        <div class="result reveal"><div class="result__pos">P4</div><div class="result__loc">Spa</div></div>
+        <div class="result is-podium reveal"><div class="result__pos">P3</div><div class="result__loc">Zandvoort</div></div>
+      </div>
+      <div class="results__grid" style="grid-template-columns:1fr 1fr; margin-top:1.2rem;">
+        <div class="result is-podium reveal" style="padding:0; overflow:hidden; aspect-ratio:3/2;"><img src="pictures/7.PNG" width="1536" height="1024" loading="lazy" decoding="async" alt="SH01 on track during a wet night race" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="result is-podium reveal" style="padding:0; overflow:hidden; aspect-ratio:3/2;"><img src="pictures/8.PNG" width="1536" height="1024" loading="lazy" decoding="async" alt="Stolz Hermès team celebrating a race win" style="width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners" id="partners">
+    <div class="wrap">
+      <div class="section-head"><h2 class="reveal">Official Partners</h2></div>
+      <div class="partners__grid reveal">
+        <div class="partners__item">avdorm</div>
+        <div class="partners__item">DYNAMIC</div>
+        <div class="partners__item">Acronis</div>
+        <div class="partners__item">DataRobot</div>
+        <div class="partners__item">Pirelli</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ticketband">
+    <div class="wrap">
+      <h2 class="reveal">Race Weekend Tickets</h2>
+      <p class="reveal">Reserve your seat for the next Stolz Hermès race weekend.</p>
+      <a class="btn reveal" href="tickets/">Get Tickets</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap footer">
+  <div class="footer__mark">STOLZ HERMÈS</div>
+  <nav class="footer__links" aria-label="Footer">
+    <a href="#about">About</a><a href="#drivers">Drivers</a><a href="#factory">Factory</a><a href="#calendar">Calendar</a><a href="#results">Results</a><a href="tickets/">Tickets</a><a href="shop/">Shop</a>
+  </nav>
+  <p class="footer__legal">© 2026 Stolz Hermès Racing Team</p>
+</footer>
+
+<button class="soundbtn" id="soundBtn" type="button" aria-pressed="false" aria-label="Unmute engine sound">🔇</button>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* telemetry bar */
+  var telemetry = document.getElementById('telemetry');
+  var nav = document.getElementById('siteNav');
+  var navLinks = document.querySelectorAll('.nav__links a[href^="#"]');
+  var sections = document.querySelectorAll('main [id]');
+  var ticking = false;
+
+  function onScroll(){
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - doc.clientHeight;
+    var pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    telemetry.style.width = pct + '%';
+
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function(sec){ if (sec.offsetTop <= pos) current = sec.id; });
+    navLinks.forEach(function(link){
+      link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive:true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* reveal on scroll */
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduced || !('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold:.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  /* countdown */
+  var target = new Date('2026-09-28T20:00:00').getTime();
+  var cdEl = document.getElementById('countdown');
+  function tickCountdown(){
+    var diff = target - Date.now();
+    if(diff <= 0){ cdEl.textContent = 'LIVE'; return; }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    cdEl.textContent = d + 'd ' + h + 'h ' + m + 'm ' + s + 's';
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  /* mobile nav */
+  var burger = document.getElementById('burgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  var scrim = document.getElementById('scrim');
+  function closeMenu(){
+    burger.classList.remove('is-open'); burger.setAttribute('aria-expanded','false');
+    mobileNav.classList.remove('is-open'); scrim.classList.remove('is-visible');
+  }
+  burger.addEventListener('click', function(){
+    var open = mobileNav.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    scrim.classList.toggle('is-visible', open);
+  });
+  scrim.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+  /* calendar row click */
+  document.querySelectorAll('#calendarTable tbody tr').forEach(function(row){
+    row.addEventListener('click', function(){
+      var gp = row.children[1].textContent;
+      alert('Added to Calendar: ' + gp);
+    });
+  });
+
+  /* custom cursor accent — desktop, fine-pointer only */
+  if(!reduced && window.matchMedia('(pointer:fine)').matches){
+    var cursor = document.getElementById('customCursor');
+    window.addEventListener('pointermove', function(e){
+      cursor.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+      cursor.classList.add('is-visible');
+    });
+    document.querySelectorAll('a, button').forEach(function(el){
+      el.addEventListener('pointerenter', function(){ cursor.classList.add('is-active'); });
+      el.addEventListener('pointerleave', function(){ cursor.classList.remove('is-active'); });
+    });
+  }
+
+  /* hero parallax (lightweight, no external animation library needed) */
+  if(!reduced){
+    var heroImg = document.querySelector('.hero img');
+    var hero = document.querySelector('.hero');
+    window.addEventListener('scroll', function(){
+      if(!hero) return;
+      var rect = hero.getBoundingClientRect();
+      if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+      var progress = 1 - (rect.bottom / (rect.height + window.innerHeight));
+      heroImg.style.transform = 'translateY(' + (progress * -6) + '%)';
+    }, { passive:true });
+  }
+
+  /* sound toggle — synthesized engine idle via Web Audio API, no external file */
+  var soundBtn = document.getElementById('soundBtn');
+  var STORAGE_KEY = 'stolzHermesMuted';
+  var muted = localStorage.getItem(STORAGE_KEY);
+  muted = muted === null ? true : muted === 'true';
+  var audioCtx = null, gainNode = null, oscillators = [];
+
+  function setButtonState(){
+    soundBtn.textContent = muted ? '🔇' : '🔊';
+    soundBtn.setAttribute('aria-pressed', muted ? 'false' : 'true');
+    soundBtn.setAttribute('aria-label', muted ? 'Unmute engine sound' : 'Mute engine sound');
+  }
+  setButtonState();
+
+  function startEngine(){
+    if(!audioCtx){
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      gainNode = audioCtx.createGain();
+      gainNode.gain.value = 0;
+      gainNode.connect(audioCtx.destination);
+      [55, 82.5, 110].forEach(function(freq){
+        var osc = audioCtx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.value = freq;
+        osc.connect(gainNode);
+        osc.start();
+        oscillators.push(osc);
+      });
+    }
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + .4);
+  }
+  function stopEngine(){
+    if(gainNode && audioCtx) gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + .3);
+  }
+
+  soundBtn.addEventListener('click', function(){
+    muted = !muted;
+    localStorage.setItem(STORAGE_KEY, muted);
+    setButtonState();
+    if(muted){ stopEngine(); } else { startEngine(); }
+  });
+})();
+</script>
+</body>
+</html>
